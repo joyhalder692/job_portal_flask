@@ -1,0 +1,261 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        JobPortal - Find Your Dream Job
+    </title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+
+    <!-- ========================= -->
+    <!-- NAVBAR -->
+    <!-- ========================= -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            JobPortal
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/jobs">
+                Jobs
+            </a>
+
+
+            {% if session.get("user_id") %}
+
+                <a href="/dashboard">
+                    Dashboard
+                </a>
+
+
+                {% if session.get("user_role") == "admin" %}
+
+                    <a href="/admin">
+                        Admin
+                    </a>
+
+                {% endif %}
+
+
+                <a href="/logout">
+                    Logout
+                </a>
+
+
+            {% else %}
+
+                <a href="/login">
+                    Login
+                </a>
+
+                <a href="/register">
+                    Register
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- ========================= -->
+    <!-- HERO SECTION -->
+    <!-- ========================= -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <h1>
+                Find Your Dream Job
+            </h1>
+
+
+            <p>
+                Search jobs and find the right opportunity
+                for your career.
+            </p>
+
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    placeholder="Job title, skills or keywords"
+                >
+
+
+                <input
+                    type="text"
+                    placeholder="Location"
+                >
+
+
+                <button>
+                    Search Jobs
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ========================= -->
+    <!-- LATEST JOBS -->
+    <!-- ========================= -->
+
+    <section class="jobs-section">
+
+        <h2>
+            Latest Jobs
+        </h2>
+
+
+        <div class="job-container">
+
+
+            {% if jobs %}
+
+
+                {% for job in jobs %}
+
+
+                    <div class="job-card">
+
+
+                        <h3>
+                            {{ job["title"] }}
+                        </h3>
+
+
+                        <p>
+                            <strong>
+                                {{ job["company"] }}
+                            </strong>
+                        </p>
+
+
+                        <p>
+                            📍 {{ job["location"] }}
+                        </p>
+
+
+                        <p>
+                            💰
+                            {{ job["salary"] or "Salary not specified" }}
+                        </p>
+
+
+                        <p>
+                            {{ job["description"] or "No description available." }}
+                        </p>
+
+
+                        <!-- VIEW JOB -->
+
+                        <a href="/job/{{ job['id'] }}">
+
+                            <button>
+                                View Job
+                            </button>
+
+                        </a>
+
+
+                    </div>
+
+
+                {% endfor %}
+
+
+            {% else %}
+
+
+                <p style="text-align: center; width: 100%;">
+
+                    No jobs available right now.
+
+                </p>
+
+
+            {% endif %}
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ========================= -->
+    <!-- CTA SECTION -->
+    <!-- ========================= -->
+
+    <section class="jobs-section">
+
+        <h2>
+            Ready to Find Your Next Opportunity?
+        </h2>
+
+
+        <div style="text-align: center; margin-top: 20px;">
+
+            <a href="/jobs">
+
+                <button>
+                    Browse All Jobs
+                </button>
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ========================= -->
+    <!-- FOOTER -->
+    <!-- ========================= -->
+
+    <footer>
+
+        <p>
+            © 2026 JobPortal. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>
+

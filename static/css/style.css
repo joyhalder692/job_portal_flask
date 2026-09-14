@@ -1,0 +1,276 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    color: #222;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 18px 8%;
+
+    background: #1e3a8a;
+}
+
+.logo {
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.nav-links a:hover {
+    color: #bfdbfe;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    background: #2563eb;
+    color: white;
+    padding: 90px 20px;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-box {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.search-box input {
+    width: 250px;
+    padding: 14px;
+    border: none;
+    border-radius: 5px;
+}
+
+.search-box button {
+    padding: 14px 25px;
+    border: none;
+    border-radius: 5px;
+
+    background: #111827;
+    color: white;
+
+    cursor: pointer;
+}
+
+.search-box button:hover {
+    background: #000;
+}
+
+
+/* =========================
+   JOBS
+========================= */
+
+.jobs-section {
+    padding: 60px 8%;
+}
+
+.jobs-section h2 {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.job-container {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.job-card {
+    background: white;
+
+    width: 300px;
+
+    padding: 25px;
+
+    border-radius: 10px;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.job-card h3 {
+    color: #1e3a8a;
+    margin-bottom: 15px;
+}
+
+.job-card p {
+    margin: 8px 0;
+}
+
+.job-card button {
+    margin-top: 15px;
+
+    padding: 10px 18px;
+
+    border: none;
+    border-radius: 5px;
+
+    background: #2563eb;
+    color: white;
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   REGISTER FORM
+========================= */
+
+.form-section {
+    min-height: 75vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 50px 20px;
+}
+
+.form-container {
+    width: 400px;
+    max-width: 100%;
+
+    background: white;
+
+    padding: 35px;
+
+    border-radius: 10px;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
+}
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.form-container label {
+    display: block;
+
+    margin-top: 15px;
+    margin-bottom: 7px;
+
+    font-weight: bold;
+}
+
+.form-container input {
+    width: 100%;
+
+    padding: 13px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 5px;
+
+    font-size: 15px;
+}
+
+.form-container button {
+    width: 100%;
+
+    margin-top: 25px;
+
+    padding: 13px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    background: #2563eb;
+
+    color: white;
+
+    font-size: 16px;
+
+    cursor: pointer;
+}
+
+.form-container button:hover {
+    background: #1d4ed8;
+}
+
+.message {
+    text-align: center;
+
+    color: green;
+
+    font-weight: bold;
+
+    margin-bottom: 15px;
+}
+
+.form-link {
+    text-align: center;
+
+    margin-top: 20px;
+}
+
+.form-link a {
+    color: #2563eb;
+
+    text-decoration: none;
+
+    font-weight: bold;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    background: #1e3a8a;
+
+    color: white;
+
+    text-align: center;
+
+    padding: 20px;
+}

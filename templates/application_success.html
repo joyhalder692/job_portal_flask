@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Application Submitted - JobPortal
+    </title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+
+    <nav class="navbar">
+
+        <div class="logo">
+            JobPortal
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/jobs">
+                Jobs
+            </a>
+
+            <a href="/dashboard">
+                Dashboard
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <section class="form-section">
+
+        <div class="form-container">
+
+            <h2>
+                Application Submitted!
+            </h2>
+
+
+            <p style="text-align: center; margin-top: 20px;">
+
+                Your application for
+
+                <strong>
+                    {{ job["title"] }}
+                </strong>
+
+                has been submitted successfully.
+
+            </p>
+
+
+            <p style="text-align: center; margin-top: 15px;">
+
+                Company:
+                <strong>
+                    {{ job["company"] }}
+                </strong>
+
+            </p>
+
+
+            <a href="/jobs">
+
+                <button>
+                    Browse More Jobs
+                </button>
+
+            </a>
+
+
+            <p class="form-link">
+
+                <a href="/dashboard">
+                    Go to Dashboard
+                </a>
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <footer>
+
+        <p>
+            © 2026 JobPortal. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>
+

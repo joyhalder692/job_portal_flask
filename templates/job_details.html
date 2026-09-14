@@ -1,0 +1,243 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {{ job["title"] }} - JobPortal
+    </title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+
+    <!-- ========================= -->
+    <!-- NAVBAR -->
+    <!-- ========================= -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            JobPortal
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/jobs">
+                Jobs
+            </a>
+
+
+            {% if session.get("user_id") %}
+
+                <a href="/dashboard">
+                    Dashboard
+                </a>
+
+
+                {% if session.get("user_role") == "admin" %}
+
+                    <a href="/admin">
+                        Admin
+                    </a>
+
+                {% endif %}
+
+
+                <a href="/logout">
+                    Logout
+                </a>
+
+
+            {% else %}
+
+                <a href="/login">
+                    Login
+                </a>
+
+                <a href="/register">
+                    Register
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- ========================= -->
+    <!-- JOB DETAILS -->
+    <!-- ========================= -->
+
+    <section class="jobs-section">
+
+        <div class="job-card"
+             style="
+                width: 700px;
+                max-width: 100%;
+                margin: auto;
+             ">
+
+
+            <!-- JOB TITLE -->
+
+            <h2>
+                {{ job["title"] }}
+            </h2>
+
+
+            <!-- COMPANY -->
+
+            <p>
+
+                <strong>
+                    Company:
+                </strong>
+
+                {{ job["company"] }}
+
+            </p>
+
+
+            <!-- LOCATION -->
+
+            <p>
+
+                <strong>
+                    Location:
+                </strong>
+
+                {{ job["location"] }}
+
+            </p>
+
+
+            <!-- SALARY -->
+
+            <p>
+
+                <strong>
+                    Salary:
+                </strong>
+
+                {{ job["salary"] or "Not specified" }}
+
+            </p>
+
+
+            <hr style="margin: 20px 0;">
+
+
+
+            <!-- DESCRIPTION -->
+
+            <h3>
+                Job Description
+            </h3>
+
+
+            <p style="margin-top: 15px; line-height: 1.7;">
+
+                {{ job["description"] or "No description available." }}
+
+            </p>
+
+
+            <br>
+
+
+
+            <!-- ========================= -->
+            <!-- APPLY BUTTON -->
+            <!-- ========================= -->
+
+            {% if session.get("user_id") %}
+
+
+                <form
+                    method="POST"
+                    action="/apply/{{ job['id'] }}"
+                >
+
+                    <button type="submit">
+
+                        Apply Now
+
+                    </button>
+
+                </form>
+
+
+            {% else %}
+
+
+                <a href="/login">
+
+                    <button type="button">
+
+                        Login to Apply
+
+                    </button>
+
+                </a>
+
+
+            {% endif %}
+
+
+
+            <br>
+            <br>
+
+
+
+            <!-- BACK TO JOBS -->
+
+            <a href="/jobs">
+
+                ← Back to Jobs
+
+            </a>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ========================= -->
+    <!-- FOOTER -->
+    <!-- ========================= -->
+
+    <footer>
+
+        <p>
+            © 2026 JobPortal. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>
+

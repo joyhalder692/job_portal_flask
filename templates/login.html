@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - JobPortal</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+
+        <div class="logo">
+            JobPortal
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">Home</a>
+            <a href="#">Jobs</a>
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- Login Form -->
+    <section class="form-section">
+
+        <div class="form-container">
+
+            <h2>Login to Your Account</h2>
+
+            {% if message %}
+                <p class="message">{{ message }}</p>
+            {% endif %}
+
+
+            <form method="POST">
+
+                <label for="email">
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    required>
+
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    required>
+
+
+                <button type="submit">
+                    Login
+                </button>
+
+            </form>
+
+
+            <p class="form-link">
+
+                Don't have an account?
+
+                <a href="/register">
+                    Register
+                </a>
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <p>
+            © 2026 JobPortal. All Rights Reserved.
+        </p>
+
+    </footer>
+
+</body>
+</html>

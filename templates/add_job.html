@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Add Job - JobPortal</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            JobPortal Admin
+        </div>
+
+        <div class="nav-links">
+            <a href="/admin">Admin</a>
+            <a href="/jobs">Jobs</a>
+            <a href="/logout">Logout</a>
+        </div>
+
+    </nav>
+
+
+    <section class="form-section">
+
+        <div class="form-container">
+
+            <h2>Add New Job</h2>
+
+            <form method="POST">
+
+                <label for="title">
+                    Job Title
+                </label>
+
+                <input
+                    type="text"
+                    id="title"
+                    name="title"
+                    placeholder="e.g. Python Developer"
+                    required
+                >
+
+
+                <label for="company">
+                    Company
+                </label>
+
+                <input
+                    type="text"
+                    id="company"
+                    name="company"
+                    placeholder="Company name"
+                    required
+                >
+
+
+                <label for="location">
+                    Location
+                </label>
+
+                <input
+                    type="text"
+                    id="location"
+                    name="location"
+                    placeholder="e.g. Kolkata, West Bengal"
+                    required
+                >
+
+
+                <label for="salary">
+                    Salary
+                </label>
+
+                <input
+                    type="text"
+                    id="salary"
+                    name="salary"
+                    placeholder="e.g. ₹15,000 - ₹25,000"
+                >
+
+
+                <label for="description">
+                    Job Description
+                </label>
+
+                <textarea
+                    id="description"
+                    name="description"
+                    rows="6"
+                    placeholder="Enter job description"
+                ></textarea>
+
+
+                <button type="submit">
+                    Add Job
+                </button>
+
+            </form>
+
+
+            <p class="form-link">
+                <a href="/admin">
+                    ← Back to Admin Dashboard
+                </a>
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <footer>
+        <p>
+            © 2026 JobPortal. All Rights Reserved.
+        </p>
+    </footer>
+
+</body>
+
+</html>
+
