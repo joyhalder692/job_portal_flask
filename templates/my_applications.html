@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>My Applications</title>
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}">
+
+
+</head>
+
+<body>
+
+
+<h1>My Applications</h1>
+
+<p>
+    Welcome, {{ session["user_name"] }}!
+</p>
+
+<hr>
+
+
+{% if applications %}
+
+    {% for application in applications %}
+
+        <div class="job-card">
+
+            <h2>
+                {{ application["title"] }}
+            </h2>
+
+            <p>
+                <strong>Company:</strong>
+                {{ application["company"] }}
+            </p>
+
+            <p>
+                <strong>Location:</strong>
+                {{ application["location"] }}
+            </p>
+
+            <p>
+                <strong>Salary:</strong>
+                {{ application["salary"] }}
+            </p>
+
+            <p>
+                <strong>Status:</strong>
+                {{ application["status"] }}
+            </p>
+
+        </div>
+
+        <br>
+
+    {% endfor %}
+
+{% else %}
+
+    <h2>No Applications Yet</h2>
+
+    <p>
+        You have not applied for any jobs yet.
+    </p>
+
+    <a href="/jobs">
+        Browse Jobs
+    </a>
+
+{% endif %}
+
+
+<br><br>
+
+<a href="/dashboard">
+    Back to Dashboard
+</a>
+
+<br><br>
+
+<a href="/logout">
+    Logout
+</a>
+
+
+</body>
+
+</html>

@@ -259,20 +259,21 @@ def login():
 # DASHBOARD
 # =========================
 
+# =========================
+# DASHBOARD
+# =========================
+
 @app.route("/dashboard")
 def dashboard():
 
     # User must be logged in
     if "user_id" not in session:
-
         return redirect(
             url_for("login")
         )
 
-
     # Create Admin link only for admin
     admin_link = ""
-
 
     if session.get("user_role") == "admin":
 
@@ -283,7 +284,6 @@ def dashboard():
                 Admin Dashboard
             </a>
         """
-
 
     return f"""
         <h1>
@@ -304,6 +304,12 @@ def dashboard():
             Browse Jobs
         </a>
 
+        <br><br>
+
+        <a href="/my-applications">
+            My Applications
+        </a>
+
         {admin_link}
 
         <br><br>
@@ -312,6 +318,98 @@ def dashboard():
             Logout
         </a>
     """
+# =========================
+# MY APPLICATIONS
+# =========================
+
+@app.route("/my-applications")
+def my_applications():
+
+    # User must be logged in
+    if "user_id" not in session:
+
+        return redirect(
+            url_for("login")
+        )
+
+
+    conn = get_db_connection()
+
+
+    applications = conn.execute("""
+        SELECT
+            applications.id,
+            applications.status,
+            jobs.title,
+            jobs.company,
+            jobs.location,
+            jobs.salary
+
+        FROM applications
+
+        JOIN jobs
+            ON applications.job_id = jobs.id
+
+        WHERE applications.user_id = ?
+
+        ORDER BY applications.id DESC
+    """, (session["user_id"],)).fetchall()
+
+
+    conn.close()
+
+
+    return render_template(
+        "my_applications.html",
+        applications=applications
+    )
+
+# =========================
+# ADMIN - UPDATE APPLICATION STATUS
+# =========================
+
+@app.route("/admin/application/<int:application_id>/status", methods=["POST"])
+def update_application_status(application_id):
+
+    # Only logged-in admin
+    if "user_id" not in session:
+        return redirect(
+            url_for("login")
+        )
+
+    if session.get("user_role") != "admin":
+        return "Access Denied"
+
+    new_status = request.form["status"]
+
+    # Allowed statuses
+    allowed_statuses = [
+        "Applied",
+        "Shortlisted",
+        "Interview",
+        "Selected",
+        "Rejected"
+    ]
+
+    if new_status not in allowed_statuses:
+        return "Invalid Status"
+
+    conn = get_db_connection()
+
+    conn.execute("""
+        UPDATE applications
+        SET status = ?
+        WHERE id = ?
+    """, (new_status, application_id))
+
+    conn.commit()
+    conn.close()
+
+    return redirect(
+        url_for("admin_applications")
+    )
+
+
 
 
 # =========================
@@ -327,7 +425,6 @@ def logout():
         url_for("home")
     )
 
-
 # =========================
 # ADMIN DASHBOARD
 # =========================
@@ -337,15 +434,12 @@ def admin():
 
     # User must be logged in
     if "user_id" not in session:
-
         return redirect(
             url_for("login")
         )
 
-
     # Only admin can access
     if session.get("user_role") != "admin":
-
         return """
             <h2>Access Denied</h2>
 
@@ -358,9 +452,7 @@ def admin():
             </a>
         """
 
-
     conn = get_db_connection()
-
 
     jobs = conn.execute("""
         SELECT *
@@ -368,17 +460,59 @@ def admin():
         ORDER BY id DESC
     """).fetchall()
 
-
     conn.close()
-
 
     return render_template(
         "admin.html",
         jobs=jobs
     )
 
+# =========================
+# ADMIN - ALL APPLICATIONS
+# =========================
 
+@app.route("/admin/applications")
+def admin_applications():
 
+    # Only admin can access
+    if "user_id" not in session:
+        return redirect(
+            url_for("login")
+        )
+
+    if session.get("user_role") != "admin":
+        return "Access Denied"
+
+    conn = get_db_connection()
+
+    applications = conn.execute("""
+        SELECT
+            applications.id,
+            applications.status,
+            users.name AS applicant_name,
+            users.email AS applicant_email,
+            jobs.title AS job_title,
+            jobs.company,
+            jobs.location,
+            jobs.salary
+
+        FROM applications
+
+        JOIN users
+            ON applications.user_id = users.id
+
+        JOIN jobs
+            ON applications.job_id = jobs.id
+
+        ORDER BY applications.id DESC
+    """).fetchall()
+
+    conn.close()
+
+    return render_template(
+        "admin_applications.html",
+        applications=applications
+    )
 
 
 # =========================

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>All Applications</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            JobPortal Admin
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/jobs">
+                Jobs
+            </a>
+
+            <a href="/admin">
+                Admin
+            </a>
+
+            <a href="/admin/add-job">
+                Add Job
+            </a>
+
+            <a href="/admin/applications">
+                All Applications
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         APPLICATIONS
+    ========================== -->
+
+    <div class="container">
+
+        <h1>
+            All Applications
+        </h1>
+
+        <hr>
+
+
+        {% if applications %}
+
+            {% for application in applications %}
+
+                <div class="job-card">
+
+                    <h2>
+                        {{ application["job_title"] }}
+                    </h2>
+
+                    <p>
+                        <strong>Applicant:</strong>
+                        {{ application["applicant_name"] }}
+                    </p>
+
+                    <p>
+                        <strong>Email:</strong>
+                        {{ application["applicant_email"] }}
+                    </p>
+
+                    <p>
+                        <strong>Company:</strong>
+                        {{ application["company"] }}
+                    </p>
+
+                    <p>
+                        <strong>Location:</strong>
+                        {{ application["location"] }}
+                    </p>
+
+                    <p>
+                        <strong>Salary:</strong>
+                        {{ application["salary"] }}
+                    </p>
+
+                    <p>
+                        <strong>Status:</strong>
+                        {{ application["status"] }}
+                    </p>
+
+
+                    <!-- =========================
+                         UPDATE STATUS
+                    ========================== -->
+
+                    <form
+                        action="/admin/application/{{ application['id'] }}/status"
+                        method="POST">
+
+                        <select name="status">
+
+                            <option value="Applied"
+                                {% if application["status"] == "Applied" %}
+                                    selected
+                                {% endif %}>
+                                Applied
+                            </option>
+
+                            <option value="Shortlisted"
+                                {% if application["status"] == "Shortlisted" %}
+                                    selected
+                                {% endif %}>
+                                Shortlisted
+                            </option>
+
+                            <option value="Interview"
+                                {% if application["status"] == "Interview" %}
+                                    selected
+                                {% endif %}>
+                                Interview
+                            </option>
+
+                            <option value="Selected"
+                                {% if application["status"] == "Selected" %}
+                                    selected
+                                {% endif %}>
+                                Selected
+                            </option>
+
+                            <option value="Rejected"
+                                {% if application["status"] == "Rejected" %}
+                                    selected
+                                {% endif %}>
+                                Rejected
+                            </option>
+
+                        </select>
+
+                        <button type="submit">
+                            Update Status
+                        </button>
+
+                    </form>
+
+                </div>
+
+                <br>
+
+            {% endfor %}
+
+
+        {% else %}
+
+            <h2>
+                No Applications Yet
+            </h2>
+
+            <p>
+                No users have applied for any jobs yet.
+            </p>
+
+        {% endif %}
+
+
+        <br>
+
+        <a href="/admin">
+            Back to Admin Dashboard
+        </a>
+
+        <br><br>
+
+        <a href="/dashboard">
+            Dashboard
+        </a>
+
+        <br><br>
+
+        <a href="/logout">
+            Logout
+        </a>
+
+    </div>
+
+</body>
+
+</html>
